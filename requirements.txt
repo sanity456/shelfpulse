@@ -1,0 +1,2 @@
+genlayer-test==0.2.16
+genvm-lint==0.2.16
