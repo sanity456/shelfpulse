@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "project": "ShelfPulse",
+  "repository": "https://github.com/sanity456/shelfpulse",
+  "network": {
+    "name": "GenLayer StudioNet",
+    "rpc": "https://studio.genlayer.com/api"
+  },
+  "deployer": "0x07f42a7465e613756c6d97889fe11bfde71a819d",
+  "source": {
+    "contractPath": "contracts/shelf_pulse.py",
+    "deployedCommit": "03b1a26b35dd0dae4d62ea0408c2eda9b4c9f6ed",
+    "sha256": "8ac75ff2b20b1cfa01bf73c2bacd33c13891253d72c0279b6f5a7000a701727d",
+    "liveSourceByteIdentical": true,
+    "runner": "py-genlayer:1jb45aa8ynh2a9c9xn3b7qqh8sm5q93hwfp7jqmwsfhh8jpz09h6"
+  },
+  "toolchain": {
+    "genlayerCli": "0.39.2",
+    "genlayerJs": "1.1.8"
+  },
+  "deployment": {
+    "contractAddress": "0x3E2Ac7AfAF299BdAC8Cd51A8A7fcCED730502a55",
+    "transaction": "0x52b607e68e96db071a2c9de723f4213209706b00334080ba14fc64b78e31d90e",
+    "status": "FINALIZED",
+    "leaderExecution": "SUCCESS",
+    "consensus": "MAJORITY_AGREE"
+  },
+  "transactions": [
+    {
+      "hash": "0xcb32f6d48c5af3a7a1fa40c54e3fd7c907c6191b52dc1237e8a02444c4a34025",
+      "action": "register_item(K20, threshold=3, target=12)",
+      "status": "FINALIZED",
+      "leaderExecution": "SUCCESS",
+      "votes": { "agree": 5, "idle": 0, "disagree": 0 }
+    },
+    {
+      "hash": "0x8b298f441d5d532340c5c36ef50f20f4c2859ec116b6f529a3044b8caf61e38b",
+      "action": "record_observation(K20, observation-1, period-1 fixture)",
+      "status": "FINALIZED",
+      "leaderExecution": "SUCCESS",
+      "votes": { "agree": 3, "idle": 2, "disagree": 0 },
+      "expectedState": { "status": "MONITORING", "lowStreak": 1, "lastQuantity": 2 }
+    },
+    {
+      "hash": "0xd090b7ee1fe40e258703a7fce0ba7477cf3e7c626c123aafc7eb950a3638fda2",
+      "action": "record_observation(K20, observation-2, period-2 fixture)",
+      "status": "FINALIZED",
+      "leaderExecution": "SUCCESS",
+      "votes": { "agree": 3, "idle": 2, "disagree": 0 },
+      "expectedState": { "status": "RESTOCK_DUE", "lowStreak": 2, "lastQuantity": 1, "recommendedOrder": 11 }
+    },
+    {
+      "hash": "0x2eaaba8e2b5be9992c5bd7816f1800acaa508a673db2f10ef5e213a7662b50f2",
+      "action": "replay observation-1",
+      "status": "FINALIZED",
+      "leaderExecution": "ERROR",
+      "expectedGuard": "[EXPECTED] observation_id_reused",
+      "votes": { "agree": 3, "idle": 2, "disagree": 0 },
+      "stateEffect": "rolled back; observation count and restock state unchanged"
+    },
+    {
+      "hash": "0x7043fb1f8aabd745855cceff55108c97ba3dd1d596f5473389b2786dc5654d57",
+      "action": "discarded CLI harness attempt to pass JSON-string parameters",
+      "status": "FINALIZED",
+      "leaderExecution": "ERROR",
+      "expectedGuard": "[EXPECTED] invalid_causes_json",
+      "note": "The CLI parsed JSON array text as an array instead of a string; retried with genlayer-js using the declared string parameters. No case state was created."
+    },
+    {
+      "hash": "0x9c5302e648029997e0c11f1225b9db7a1dee0c2f5287510abf83fcc4befbc8dd",
+      "action": "discarded CLI harness attempt to pass JSON-string parameters",
+      "status": "FINALIZED",
+      "leaderExecution": "ERROR",
+      "expectedGuard": "[EXPECTED] invalid_causes",
+      "note": "The CLI parsed JSON array text as an array instead of a string; retried with genlayer-js using the declared string parameters. No case state was created."
+    }
+  ],
+  "evidence": {
+    "fixturePeriod1": "https://raw.githubusercontent.com/sanity456/shelfpulse/03b1a26b35dd0dae4d62ea0408c2eda9b4c9f6ed/examples/stock_period_1.json",
+    "fixturePeriod2": "https://raw.githubusercontent.com/sanity456/shelfpulse/03b1a26b35dd0dae4d62ea0408c2eda9b4c9f6ed/examples/stock_period_2.json",
+    "finalReadback": {
+      "status": "RESTOCK_DUE",
+      "lastPeriod": 2,
+      "lastQuantity": 1,
+      "lowStreak": 2,
+      "observationCount": 2,
+      "recommendedOrder": 11,
+      "targetStock": 12
+    }
+  }
+}

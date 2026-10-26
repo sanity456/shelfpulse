@@ -16,6 +16,10 @@ Views: `get_item`, `get_observation`
 
 One deployment supports multiple creator-scoped items. See `ARCHITECTURE.md`, `ORIGINALITY.md`, and `SECURITY.md` for the mechanism comparison and limits.
 
+## StudioNet evidence
+
+Deployed at `0x3E2Ac7AfAF299BdAC8Cd51A8A7fcCED730502a55`. The released source is pinned to commit `03b1a26b35dd0dae4d62ea0408c2eda9b4c9f6ed`; the deployment and live test transaction receipts, pinned evidence fixtures, state readback, and source hash are recorded in [`STUDIONET_RELEASE_EVIDENCE.json`](STUDIONET_RELEASE_EVIDENCE.json).
+
 ## Local checks
 
 ```text
